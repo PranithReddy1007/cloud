@@ -1,17 +1,15 @@
+import os
 from flask import Flask, render_template
 
-# Initialize the Flask application
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def home():
-    # Sample data to pass into the HTML template
-    user_name = "Alex"
-    skills_list = ["Python", "Flask", "HTML", "CSS", "SQL"]
-    
-    # Renders the index.html template and injects variables
-    return render_template('index.html', name=user_name, skills=skills_list)
+    return render_template(
+        "index.html",
+        message="Hello from the cloud!"
+    )
 
-if __name__ == '__main__':
-    # Runs the app locally on http://127.0.0.1:5000
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
